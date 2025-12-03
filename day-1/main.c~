@@ -1,0 +1,25 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+// 1. read the input line by line
+// 2. parse the input to a struct that contains direction and amount
+// 3. do the thing
+
+typedef struct {
+  char* buffer;
+  ssize_t buffer_length;
+  ssize_t input_length;
+} InputBuffer;
+
+int main(void)
+{
+  InputBuffer* input_buffer = malloc(sizeof(InputBuffer));
+
+  ssize_t bytes_read = getline(&(input_buffer->buffer), &(input_buffer->buffer_length), stdin);
+  if (bytes_read <= 0) exit(EXIT_FAILURE);
+  input_buffer->input_length = bytes_read;
+
+  printf("your input: %s", input_buffer->buffer);
+
+  return 0;
+}
